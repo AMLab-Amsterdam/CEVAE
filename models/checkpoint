@@ -1,0 +1,2 @@
+model_checkpoint_path: "m6-ihdp"
+all_model_checkpoint_paths: "m6-ihdp"
