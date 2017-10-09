@@ -1,0 +1,18 @@
+Twin US births in 1989-1991.
+Raw data is taken from here:
+http://www.nber.org/data/linked-birth-infant-death-data-vital-statistics-data.html
+Specifically these files:
+http://www.nber.org/lbid/1989/linkco1989us_den.csv.zip
+http://www.nber.org/lbid/1989/linkco1990us_den.csv.zip
+http://www.nber.org/lbid/1989/linkco1991us_den.csv.zip
+The dataset idea is based on the paper:
+Almond, Douglas, Kenneth Y. Chay, and David S. Lee. "The costs of low birth weight." The Quarterly Journal of Economics 120.3 (2005): 1031-1083.
+
+twin_pairs_X_3years_samesex.csv includes 50 covariates for the twin pair such as mother and father age and education, 
+health complications and so on. The features which are different between the pair such as sex and birth order are denoted with _0 and _1 for the lighter and heavier twin, respectively.
+
+twin_pairs_T_3years_samesex.csv includes the birth weights in grams of both twins in the pair, dbirt_0 and dbirt_1. The lightest always first. I removed all pairs with exactly the same weight.
+
+twin_pairs_Y_3years_samesex.csv includes the mortality outcome for both twins, mort_0 and mort_1.
+
+covar_types.txt indicates for each of the column in twin_pairs_X.csv whether it is binary (e.g. married mom), ordinal (e.g. age mom), categorical (e.g. state of birth), or cyclical (just one: month of birth).
