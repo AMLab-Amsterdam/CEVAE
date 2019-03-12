@@ -3,8 +3,8 @@ Raw data is taken from here:
 http://www.nber.org/data/linked-birth-infant-death-data-vital-statistics-data.html
 Specifically these files:
 http://www.nber.org/lbid/1989/linkco1989us_den.csv.zip
-http://www.nber.org/lbid/1989/linkco1990us_den.csv.zip
-http://www.nber.org/lbid/1989/linkco1991us_den.csv.zip
+http://www.nber.org/lbid/1990/linkco1990us_den.csv.zip
+http://www.nber.org/lbid/1991/linkco1991us_den.csv.zip
 
 The dataset guide is available here:
 http://www.nber.org/lbid/docs/LinkCO89Guide.pdf
