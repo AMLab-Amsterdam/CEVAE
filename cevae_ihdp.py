@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """CEVAE model on IHDP
 """
-from __future__ import absolute_import
-from __future__ import division
+
+
 
 import edward as ed
 import tensorflow as tf
@@ -42,7 +42,7 @@ lamba = 1e-4  # weight decay
 nh, h = 3, 200  # number and size of hidden layers
 
 for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_valid_test()):
-    print '\nReplication {}/{}'.format(i + 1, args.reps)
+    print('\nReplication {}/{}'.format(i + 1, args.reps))
     (xtr, ttr, ytr), (y_cftr, mu0tr, mu1tr) = train
     (xva, tva, yva), (y_cfva, mu0va, mu1va) = valid
     (xte, tte, yte), (y_cfte, mu0te, mu1te) = test
@@ -175,7 +175,7 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                 logpvalid = sess.run(logp_valid, feed_dict={x_ph_bin: xva[:, 0:len(binfeats)], x_ph_cont: xva[:, len(binfeats):],
                                                             t_ph: tva, y_ph: yva})
                 if logpvalid >= best_logpvalid:
-                    print 'Improved validation bound, old: {:0.3f}, new: {:0.3f}'.format(best_logpvalid, logpvalid)
+                    print('Improved validation bound, old: {:0.3f}, new: {:0.3f}'.format(best_logpvalid, logpvalid))
                     best_logpvalid = logpvalid
                     saver.save(sess, 'models/m6-ihdp')
 
@@ -189,11 +189,11 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
                 y0, y1 = y0 * ys + ym, y1 * ys + ym
                 score_test = evaluator_test.calc_stats(y1, y0)
 
-                print "Epoch: {}/{}, log p(x) >= {:0.3f}, ite_tr: {:0.3f}, ate_tr: {:0.3f}, pehe_tr: {:0.3f}, " \
+                print("Epoch: {}/{}, log p(x) >= {:0.3f}, ite_tr: {:0.3f}, ate_tr: {:0.3f}, pehe_tr: {:0.3f}, " \
                       "rmse_f_tr: {:0.3f}, rmse_cf_tr: {:0.3f}, ite_te: {:0.3f}, ate_te: {:0.3f}, pehe_te: {:0.3f}, " \
                       "dt: {:0.3f}".format(epoch + 1, n_epoch, avg_loss, score_train[0], score_train[1], score_train[2],
                                            rmses_train[0], rmses_train[1], score_test[0], score_test[1], score_test[2],
-                                           time.time() - t0)
+                                           time.time() - t0))
 
         saver.restore(sess, 'models/m6-ihdp')
         y0, y1 = get_y0_y1(sess, y_post, f0, f1, shape=yalltr.shape, L=100)
@@ -206,17 +206,17 @@ for i, (train, valid, test, contfeats, binfeats) in enumerate(dataset.get_train_
         score_test = evaluator_test.calc_stats(y1t, y0t)
         scores_test[i, :] = score_test
 
-        print 'Replication: {}/{}, tr_ite: {:0.3f}, tr_ate: {:0.3f}, tr_pehe: {:0.3f}' \
+        print('Replication: {}/{}, tr_ite: {:0.3f}, tr_ate: {:0.3f}, tr_pehe: {:0.3f}' \
               ', te_ite: {:0.3f}, te_ate: {:0.3f}, te_pehe: {:0.3f}'.format(i + 1, args.reps,
                                                                             score[0], score[1], score[2],
-                                                                            score_test[0], score_test[1], score_test[2])
+                                                                            score_test[0], score_test[1], score_test[2]))
         sess.close()
 
-print 'CEVAE model total scores'
+print('CEVAE model total scores')
 means, stds = np.mean(scores, axis=0), sem(scores, axis=0)
-print 'train ITE: {:.3f}+-{:.3f}, train ATE: {:.3f}+-{:.3f}, train PEHE: {:.3f}+-{:.3f}' \
-      ''.format(means[0], stds[0], means[1], stds[1], means[2], stds[2])
+print('train ITE: {:.3f}+-{:.3f}, train ATE: {:.3f}+-{:.3f}, train PEHE: {:.3f}+-{:.3f}' \
+      ''.format(means[0], stds[0], means[1], stds[1], means[2], stds[2]))
 
 means, stds = np.mean(scores_test, axis=0), sem(scores_test, axis=0)
-print 'test ITE: {:.3f}+-{:.3f}, test ATE: {:.3f}+-{:.3f}, test PEHE: {:.3f}+-{:.3f}' \
-      ''.format(means[0], stds[0], means[1], stds[1], means[2], stds[2])
+print('test ITE: {:.3f}+-{:.3f}, test ATE: {:.3f}+-{:.3f}, test PEHE: {:.3f}+-{:.3f}' \
+      ''.format(means[0], stds[0], means[1], stds[1], means[2], stds[2]))
