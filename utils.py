@@ -30,7 +30,7 @@ def fc_net(inp, layers, out_layers, scope, lamba=1e-3, activation=tf.nn.relu, re
 def get_y0_y1(sess, y, f0, f1, shape=(), L=1, verbose=True):
     y0, y1 = np.zeros(shape, dtype=np.float32), np.zeros(shape, dtype=np.float32)
     ymean = y.mean()
-    for l in xrange(L):
+    for l in range(L):
         if L > 1 and verbose:
             sys.stdout.write('\r Sample {}/{}'.format(l + 1, L))
             sys.stdout.flush()
@@ -38,7 +38,7 @@ def get_y0_y1(sess, y, f0, f1, shape=(), L=1, verbose=True):
         y1 += sess.run(ymean, feed_dict=f1) / L
 
     if L > 1 and verbose:
-        print
+        print()
     return y0, y1
 
 

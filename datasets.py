@@ -9,17 +9,17 @@ class IHDP(object):
         # which features are binary
         self.binfeats = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
         # which features are continuous
-        self.contfeats = [i for i in xrange(25) if i not in self.binfeats]
+        self.contfeats = [i for i in range(25) if i not in self.binfeats]
 
     def __iter__(self):
-        for i in xrange(self.replications):
+        for i in range(self.replications):
             data = np.loadtxt(self.path_data + '/ihdp_npci_' + str(i + 1) + '.csv', delimiter=',')
             t, y, y_cf = data[:, 0], data[:, 1][:, np.newaxis], data[:, 2][:, np.newaxis]
             mu_0, mu_1, x = data[:, 3][:, np.newaxis], data[:, 4][:, np.newaxis], data[:, 5:]
             yield (x, t, y), (y_cf, mu_0, mu_1)
 
     def get_train_valid_test(self):
-        for i in xrange(self.replications):
+        for i in range(self.replications):
             data = np.loadtxt(self.path_data + '/ihdp_npci_' + str(i + 1) + '.csv', delimiter=',')
             t, y, y_cf = data[:, 0][:, np.newaxis], data[:, 1][:, np.newaxis], data[:, 2][:, np.newaxis]
             mu_0, mu_1, x = data[:, 3][:, np.newaxis], data[:, 4][:, np.newaxis], data[:, 5:]
