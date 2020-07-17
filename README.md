@@ -1,6 +1,6 @@
 # CEVAE
 This repository contains the code for the  Causal Effect Variational 
-Autoencoder (CEVAE) model as developed at [1]. 
+Autoencoder (CEVAE) model as developed at [1]. This code is provided as is and will not be updated / maintained.
 
 Sample experiment
 ---
